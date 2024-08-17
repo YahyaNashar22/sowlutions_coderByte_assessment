@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sowlutions CoderByte Assessment</title>
+    <link rel="stylesheet" href="./global.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <h1 class="header">{{ header }}</h1>
+      <h3 class="subHeader">{{ subHeader }}</h3>
+      <div class="searchContainer">
+        <label>
+          Search To See The Magic
+          <input
+            v-model="searchForMe"
+            @input="onSearchInputChange"
+            type="text"
+            placeholder="What do you wanna search for?"
+          />
+        </label>
+        <button @click="toggleTexts">
+          {{ visibleText ? "Hide" : "Show" }} Texts
+        </button>
+      </div>
+      <div v-if="visibleText">
+        <ul>
+          <li
+            v-for="(text, index) in searchResults"
+            :key="index"
+            v-html="highlightText(text)"
+          >
+            {{ text }}
+          </li>
+        </ul>
+        <p v-if="searchResults.length==0">{{ notFound }}</p>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+vue is all about directives to handle interactions dynamically
+in this exercise i used the followings:
+v-model: stores the input value inside the variable declared in the data obj
+@input: handle the input change event
+@click: handle the click event
+v-if: conditional statement ( if else )
+v-for: loops through the array and displays content accordingly
+v-html: used to dynamically insert styled html content
+-->
